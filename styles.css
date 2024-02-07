@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.calculator {
+    height: 700px;
+    width: 500px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.display {
+    width: 400px;
+    height: 100px;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.buttons {
+    margin-top: 50px;
+    display: flex;
+}
+
+
+
+.numberContainer {
+    height: 500px;
+    width: 500px;
+    border: 1px solid black;
+    gap: 50px;
+    display: flex;
+}
+
+.numberButtons {
+    display: flex;
+    border: 1px solid black;
+    gap: 20px;
+}
+
+
+.operations {
+    
+    height: 500px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+.operations > p {
+    height: 70px;
+    width: auto;
+    border: 1px solid black;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operations > p:hover {
+    background-color: blueviolet;
+}
