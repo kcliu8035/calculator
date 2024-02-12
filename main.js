@@ -1,13 +1,3 @@
-// const nine = document.getElementById('nine');
-// const eight = document.getElementById('eight');
-// const seven = document.getElementById('seven');
-// const six = document.getElementById('six');
-// const five = document.getElementById('five');
-// const four = document.getElementById('four');
-// const three = document.getElementById('three');
-// const two = document.getElementById('two');
-// const one = document.getElementById('one');
-// const zero = document.getElementById('zero');
 const display = document.querySelector('.display');
 const mainDisplay = document.querySelector('.mainDisplay');
 const smallDisplay = document.querySelector('.smallDisplay');
@@ -27,9 +17,8 @@ const clearBTN = document.getElementById('clear');
 let firstInput = [];
 let secondInput = [];
 let calculation = [];
-
 let counter = 0;
-let decimalCounter = 0;
+let operationActivated = false;
 
 
 numberButtons.forEach(button => {
@@ -37,7 +26,6 @@ numberButtons.forEach(button => {
         counter++;
         if(counter <= 15) {
             mainDisplay.innerHTML += button.textContent;
-            console.log(counter);
         }
         
         if(counter >= 10) {
@@ -51,6 +39,11 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
+        operationActivated = true;
+        if(operationActivated = true) {
+            firstInput.push(mainDisplay.textContent);
+        }
+        console.log(operationActivated);
         counter = 0;
         decimalBTN.disabled = false;
         initiateCalculation();
@@ -58,6 +51,33 @@ operationButtons.forEach(button => {
         mainDisplay.innerHTML = '';
     })  
 })
+
+
+//OPERATIONS FUNCTIONALITIES:
+clearBTN.addEventListener('click', () => {
+    counter = 0;
+    decimalBTN.disabled = false;
+    mainDisplay.innerHTML = '';
+    smallDisplay.innerHTML = '';
+});
+
+
+
+function sum (a, b) {
+    let input = a + b;
+    let input2 = a + b + 2;
+    firstInput.push(input);
+    secondInput.push(input2)
+    calculation.push(input + input2);
+}
+
+sum(1, 3);
+
+function initiateCalculation(input) {
+    firstInput.push(this.input);
+    console.log(firstInput);
+};
+
 
 //NOTE: Had deleteBTN event listener nested in operationsButtons to target each button output
 deleteBTN.addEventListener('click', () => {
@@ -79,37 +99,8 @@ function stopDecimal() {
 }
 
 
-
-
-
-
-//OPERATIONS FUNCTIONALITIES:
-clearBTN.addEventListener('click', () => {
-    counter = 0;
-    mainDisplay.innerHTML = '';
-    smallDisplay.innerHTML = '';
-});
-
-
-
-function sum (a, b) {
-    let input = a + b;
-    let input2 = a + b + 2;
-    firstInput.push(input);
-    secondInput.push(input2)
-    calculation.push(input + input2);
-}
-
-sum(1, 3);
-
-function initiateCalculation() {
-    console.log('initiated');
-};
-
-
-
 //NOTES:
-    //1) Figured out how to have every button be targeted without having to define each one. May need to have button variable for every group.
+    //1) Have Delete button delete numbers and numbers only.
     //2) (DONE) Need to figure out how to stop numbers from spilling out from display.  
     //3) (DONE) Include little display on calculator to show operations being used. 
     //4) (DONE) Figure out why Clear button stops anything from showing up again in display.
@@ -117,4 +108,5 @@ function initiateCalculation() {
     //6) Figure out how to have two arrays calculate properly as integers. 
     //7) firstInput is stored into array after operation button is clicked, and then secondInput is targeted.
             //Any operation click leads to calculation into calculation.
+
 
