@@ -19,6 +19,7 @@ let secondInput = [];
 let calculation = [];
 let counter = 0;
 let operationActivated = false;
+let operationsCounter = 0; 
 
 
 numberButtons.forEach(button => {
@@ -39,16 +40,30 @@ numberButtons.forEach(button => {
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
+        
         operationActivated = true;
-        if(operationActivated = true) {
-            firstInput.push(mainDisplay.textContent);
+        if(operationActivated && operationsCounter === 2) {
+            initiateCalculation(firstInput, secondInput);
+            operationsCounter = 0;
+            firstInput = [];
+            secondInput = [];
+        }else if(operationActivated && operationsCounter === 1) {
+            clearDisplay = true;
+            secondInput = mainDisplay.textContent;
+            operationsCounter++;
+        } else if(operationActivated && operationsCounter === 0) {
+            firstInput = mainDisplay.textContent;
+            operationsCounter++;
+            calculation = [];
         }
-        console.log(operationActivated);
+        // console.log(operationActivated);
         counter = 0;
+        
         decimalBTN.disabled = false;
-        initiateCalculation();
         smallDisplay.innerHTML += `${mainDisplay.textContent} ${button.textContent}`
         mainDisplay.innerHTML = '';
+        console.log(`First: ${firstInput} \nSecond: ${secondInput} \nCalculation: ${calculation} \nCounter: ${operationsCounter}`);
+       
     })  
 })
 
@@ -59,6 +74,9 @@ clearBTN.addEventListener('click', () => {
     decimalBTN.disabled = false;
     mainDisplay.innerHTML = '';
     smallDisplay.innerHTML = '';
+    firstInput = [];
+    secondInput = [];
+    calculation = [];
 });
 
 
@@ -71,12 +89,10 @@ function sum (a, b) {
     calculation.push(input + input2);
 }
 
-sum(1, 3);
-
-function initiateCalculation(input) {
-    firstInput.push(this.input);
-    console.log(firstInput);
+function initiateCalculation(input1, input2) {
+    // mainDisplay.innerHTML += calculated
 };
+
 
 
 //NOTE: Had deleteBTN event listener nested in operationsButtons to target each button output
@@ -99,6 +115,26 @@ function stopDecimal() {
 }
 
 
+function operations(operator) {
+    var operators = {
+        '+': function(a, b) {
+            return a + b;
+        },
+        '-': function(a, b) {
+            return a - b;
+        },
+        '*': function(a, b) {
+            return a * b;
+        },
+        '/': function(a, b) {
+            return a / b;
+        },
+    };
+    console.log(operators[operator](firstInput, secondInput));
+}
+
+
+
 //NOTES:
     //1) Have Delete button delete numbers and numbers only.
     //2) (DONE) Need to figure out how to stop numbers from spilling out from display.  
@@ -108,5 +144,9 @@ function stopDecimal() {
     //6) Figure out how to have two arrays calculate properly as integers. 
     //7) firstInput is stored into array after operation button is clicked, and then secondInput is targeted.
             //Any operation click leads to calculation into calculation.
-
+    //8 Write out function for if firstInput exists, then secondInput is targetted. 
+            //If both exist and then operation button is clicked again, then next set of numbers are stored into calculatedInput array
+            //If user continues calculations without resetting, then calculatedInput takes firstInput's place and is calculated with secondInput
+                //Which array do subsequent calculations then get stored? 
+                //EX: If(calculatedInput = true ? firstInput = calculatedInput)
 
