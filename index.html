@@ -19,9 +19,9 @@
             <div class="numberContainer">
                 <div class="numberButtonsContainer">
                     <div class="topRow">
-                        <button id="nine" class="numberButtons">9</button>
-                        <button id="eight" class="numberButtons">8</button>
-                        <button id="seven" class="numberButtons">7</button>
+                        <button class="numberButtons">9</button>
+                        <button class="numberButtons">8</button>
+                        <button class="numberButtons">7</button>
                     </div>
                     <div class="middleRow">
                         <button class="numberButtons">6</button>
@@ -36,7 +36,7 @@
 
                     <div class="zeroRow">
                         <button id="decimal" style="font-size: 30px;" class="numberButtons">.</button>
-                        <button id="zero" class="numberButtons">0</button>
+                        <button class="numberButtons">0</button>
                         <button id="negative" style="font-size: 30px;">+/-</button>
                     </div>
                 </div>
@@ -45,14 +45,16 @@
             <div class="operations">
                 <button id="clear">C</button>
                 <button id="delete" style="font-size: 18px;">DEL</button>
-                <button id="add" class="operationButton" onclick="operations('+')">+</button>
-                <button id="subtract" class="operationButton" onclick="operations('-')">-</button>
-                <button id="multiply" class="operationButton" onclick="operations('*')">*</button>
-                <button id="divide" class="operationButton" onclick="operations('/')">/</button>
-                <button id="equals" class="operationButton" onclick="operations('=')">=</button>
+                <button id="add" class="operationButton" onclick="initiateCalculation('+')">+</button>
+                <button id="subtract" class="operationButton" onclick="initiateCalculation('-')">-</button>
+                <button id="multiply" class="operationButton" onclick="initiateCalculation('*')">*</button>
+                <button id="divide" class="operationButton" onclick="initiateCalculation('/')">/</button>
+                <button id="equals" class="operationButton" onclick="initiateCalculation(operatorInput)">=</button>
                 
             </div>
         </div>
     </div>
 </body>
 </html>
+
+

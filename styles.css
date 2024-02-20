@@ -3,6 +3,7 @@
     padding: 0;
 }
 
+
 .calculator {
     height: 709px;
     width: 550px;
@@ -97,3 +98,7 @@ button:disabled {
     font-size: xx-large;
     /* background-color: rgb(213, 215, 216); */
 }
+
+/* .operationButton:active {
+    background-color: blue;
+} */
