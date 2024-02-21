@@ -13,6 +13,7 @@ const divideBTN = document.getElementById('divide');
 const multiplyBTN = document.getElementById('multiply');
 const equalsBTN = document.getElementById('equals');
 const clearBTN = document.getElementById('clear');
+const zeroBTN = document.getElementById('zeroBTN');
 
 let firstInput = [];
 let secondInput = [];
@@ -22,6 +23,7 @@ let counter = 0;
 let operationActivated = false;
 let operationsCounter = 0; 
 let numberButtonClicked = false;
+let equalsBTNActivated = false;
 
 
 numberButtons.forEach(button => {
@@ -32,7 +34,10 @@ numberButtons.forEach(button => {
         }
         operationActivated = false;
         numberButtonClicked = true;
-        if(counter <= 15) {
+        
+        if(mainDisplay.textContent === '0') {
+            mainDisplay.innerHTML = button.textContent;
+        } else if(counter <= 15) {
             mainDisplay.innerHTML += button.textContent;
         }
         
@@ -51,7 +56,7 @@ operationButtons.forEach(button => {
         operationActivated = true;
         counter = 0;
         decimalBTN.disabled = false;
-        smallDisplay.innerHTML = `${calculation} ${button.textContent}`
+        // smallDisplay.innerHTML = `${firstInput} ${button.textContent}`
         // smallDisplay.innerHTML += `${mainDisplay.textContent} ${button.textContent}`
         // if (operationActivated && numberButtonClicked) {
         //     mainDisplay.innerHTML = '';
@@ -81,18 +86,13 @@ deleteBTN.addEventListener('click', () => {
 })
 
 equalsBTN.addEventListener('click', () => {
-    let result = initiateCalculation(operatorInput);
-    // mainDisplay.innerHTML = calculation;
-    alert(`RESULT: ${result}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
+        equalsBTNActivated = true;
+        initiateCalculation(operatorInput);
 })
 
 decimalBTN.addEventListener('click', () => {
-   stopDecimal();
-})
-
-function stopDecimal() {
     decimalBTN.disabled = true;
-}
+})
 
 
 function initiateCalculation(operator) {
@@ -110,10 +110,14 @@ function initiateCalculation(operator) {
             return a / b;
         }, 
     };
-    
-
-
-    if(firstInput.length > 0) {
+    if(equalsBTNActivated) {
+        secondInput = mainDisplay.textContent;
+        // alert(`RESULT: ${calculation}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
+        calculation = [operators[operatorInput](parseInt(firstInput), parseInt(secondInput))];
+        mainDisplay.innerHTML = calculation;
+        equalsBTNActivated = false;
+        firstInput = [];
+    } else if(firstInput.length > 0) {
         secondInput = mainDisplay.textContent;
         firstInput = [operators[operatorInput](parseInt(firstInput), parseInt(secondInput))];
         // alert(`RESULT: ${calculation}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
@@ -122,11 +126,7 @@ function initiateCalculation(operator) {
     } else if(firstInput.length === 0) {
         firstInput = mainDisplay.textContent;
     }
-    
-    operatorInput = operator;  
-    // debugger
-    
-   
+    operatorInput = operator;     
 }
 
 
@@ -140,17 +140,17 @@ function initiateCalculation(operator) {
     //6) Figure out how to have two arrays calculate properly as integers. 
     //7) firstInput is stored into array after operation button is clicked, and then secondInput is targeted.
             //Any operation click leads to calculation into calculation.
-    //8 Write out function for if firstInput exists, then secondInput is targetted. 
+    //8 (DONE) Write out function for if firstInput exists, then secondInput is targetted. 
             //If both exist and then operation button is clicked again, then next set of numbers are stored into calculatedInput array
             //If user continues calculations without resetting, then calculatedInput takes firstInput's place and is calculated with secondInput
                 //Which array do subsequent calculations then get stored? 
                 //EX: If(calculatedInput = true ? firstInput = calculatedInput)
-    //9) Need to find out how to have function immediately calculate after second input is identified and operation button is clicked again
+    //9)(DONE) Need to find out how to have function immediately calculate after second input is identified and operation button is clicked again
             // Problem seems to be in when the second input is stored into array. 
             // Calculation does occur at the proper time, but second array is still empty when it is activated. 
             // FIXED issue by moving storage of second input into the if function in initiateCalculation
                 //Issue now is need to implement the stored operatorInput value into calculation.
-    // 10) Create seperate function for equals operator that takes storedOperator and calls initiateCalculation().
+    // 10) (DONE) Create seperate function for equals operator that takes storedOperator and calls initiateCalculation().
             //if (smallDisplay !== '') if it's not empy, execute calculation.
     // 11) Make sure 0 or symbols cannot be first input.
             // if(mainDisplay = '0' || 'operator') 
