@@ -1,4 +1,3 @@
-const display = document.querySelector('.display');
 let mainDisplay = document.querySelector('.mainDisplay');
 const smallDisplay = document.querySelector('.smallDisplay');
 const numberButtons = document.querySelectorAll('.numberButtons');
@@ -21,7 +20,6 @@ let calculation = [];
 let operatorInput = [];
 let counter = 0;
 let operationActivated = false;
-let operationsCounter = 0; 
 let numberButtonClicked = false;
 let equalsBTNActivated = false;
 
@@ -61,9 +59,6 @@ operationButtons.forEach(button => {
         // if (operationActivated && numberButtonClicked) {
         //     mainDisplay.innerHTML = '';
         // }
-        
-        console.log(`First: ${firstInput} \nSecond: ${secondInput} \nCalculation: ${calculation} \nCounter: ${operationsCounter}`);
-       
     })  
 })
 
@@ -113,13 +108,13 @@ function initiateCalculation(operator) {
     if(equalsBTNActivated) {
         secondInput = mainDisplay.textContent;
         // alert(`RESULT: ${calculation}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
-        calculation = [operators[operatorInput](parseInt(firstInput), parseInt(secondInput))];
+        calculation = [operators[operatorInput](parseFloat(firstInput), parseFloat(secondInput)).toFixed(8)];
         mainDisplay.innerHTML = calculation;
         equalsBTNActivated = false;
         firstInput = [];
     } else if(firstInput.length > 0) {
         secondInput = mainDisplay.textContent;
-        firstInput = [operators[operatorInput](parseInt(firstInput), parseInt(secondInput))];
+        firstInput = [operators[operatorInput](parseFloat(firstInput), parseFloat(secondInput))];
         // alert(`RESULT: ${calculation}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
         mainDisplay.innerHTML = firstInput;
         secondInput = [];
