@@ -107,9 +107,13 @@ function initiateCalculation(operator) {
     };
     if(equalsBTNActivated) {
         secondInput = mainDisplay.textContent;
-        // alert(`RESULT: ${calculation}, OPERATOR: ${operatorInput}, INPUT1: ${firstInput} INPUT2: ${secondInput}`);
-        calculation = [operators[operatorInput](parseFloat(firstInput), parseFloat(secondInput)).toFixed(8)];
+        calculation = [operators[operatorInput](parseFloat(firstInput), parseFloat(secondInput))];
+        if(calculation.includes('.')) {
+            let result = calculation.split('.');
+            console.log(result);
+        }
         mainDisplay.innerHTML = calculation;
+        smallDisplay.innerHTML = `${firstInput} ${operatorInput} ${secondInput} =`;
         equalsBTNActivated = false;
         firstInput = [];
     } else if(firstInput.length > 0) {
@@ -121,7 +125,11 @@ function initiateCalculation(operator) {
     } else if(firstInput.length === 0) {
         firstInput = mainDisplay.textContent;
     }
+
     operatorInput = operator;     
+    if(firstInput.length > 0) {
+        smallDisplay.innerHTML = `${firstInput} ${operatorInput}`;
+    }
 }
 
 
@@ -160,7 +168,9 @@ function initiateCalculation(operator) {
 
     //17) (DONE)Figure out booleans for when you click on operator and then clck on preceding number
             // Just changed order in which mainDisplay textContent was cleared
-    //18) Problem with Equals button calculating firstInput and secondInput and storing it into secondInput:
+    //18) (DONE) Problem with Equals button calculating firstInput and secondInput and storing it into secondInput:
             // secondInput is defined after clicking an operator
+    //19) Need to fix smallDisplay.
+    //20) Need to have toFixed() apply only when a decimal is included in a value.
             
 
